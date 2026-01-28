@@ -4,6 +4,8 @@ from turtle import Turtle, Vec2D
 class TurtleApp:
     def __init__(self) -> None:
         self._turtle = Turtle()
+        self.pinceau_actif = True
+        self._turtle.pendown()
 
     def set_up(self):
         # Initial position: pointing upward
@@ -28,6 +30,7 @@ class TurtleApp:
         self._turtle.screen.onkey(self.on_left_key_event, "Left")
         self._turtle.screen.onkey(self.on_right_key_event, "Right")
         self._turtle.screen.onkey(self.reset_turtle, "space")
+        self._turtle.screen.onkey(self.active, "p")
 
     def on_up_key_event(self):
         self._turtle.forward(10)
@@ -47,3 +50,14 @@ class TurtleApp:
         self._turtle.setheading(90)
         self._turtle.color("black")
         self._turtle.fillcolor("black")
+    
+    def active(self):
+        if self.pinceau_actif:
+            self._turtle.penup()
+            self._turtle.color("red")
+            self.pinceau_actif = False
+        else :
+            self._turtle.pendown()
+            self._turtle.color("black")
+            self.pinceau_actif=True
+        
