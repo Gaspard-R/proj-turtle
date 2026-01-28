@@ -1,9 +1,30 @@
 from turtle import Turtle, Vec2D
-
+import tkinter as tk
 
 class TurtleApp:
     def __init__(self) -> None:
         self._turtle = Turtle()
+    
+    def help_screen(self):
+        # On récupère la fenêtre parente de la tortue (qui est en Tkinter)
+        canvas = self._turtle.screen.getcanvas()
+        parent = canvas.master
+        
+        # On crée un bouton Tkinter 
+        self.bouton_guide = tk.Button(
+            parent, 
+            text="Guide commandes", 
+            command=self.afficher_fenetre_info,
+            bg="lightgrey"
+        )
+        
+        # On le place en haut à gauche (0,0 dans le système de la fenêtre)
+        self.bouton_guide.place(x=10, y=10)
+
+    def afficher_fenetre_info(self):
+        # On utilise une boîte de dialogue simple de tkinter
+        from tkinter import messagebox
+        messagebox.showinfo("Guide", "⬆️/-10 | ⬇️/+10 | ⬅️/➡️ : Tourner")
         self.pinceau_actif = True
         self._turtle.pendown()
 
@@ -20,6 +41,8 @@ class TurtleApp:
     def run_app(self):
         # Set up the app
         self.set_up()
+
+        self.help_screen()
 
         # Infinite main loop
         self._turtle.screen.mainloop()
@@ -51,6 +74,7 @@ class TurtleApp:
         self._turtle.teleport(0, 0)
         self._turtle.setheading(90)
         self._turtle.color("black")
+        self._turtle.fillcolor("black")
         self._turtle.fillcolor("black")
     
     def active(self):
