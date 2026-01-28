@@ -32,6 +32,7 @@ class TurtleApp:
         self._turtle.screen.onkey(self.reset_turtle, "space")
         self._turtle.screen.onkey(self.active, "p")
         self._turtle.screen.onscreenclick(self.rosace)
+        self._turtle.screen.onkey(self.r2, "r")
 
 
     def on_up_key_event(self):
@@ -75,3 +76,19 @@ class TurtleApp:
             if abs(self._turtle.pos() - Vec2D(x, y)) < 1:
                 break
         self._turtle.end_fill()
+    
+    def faire_carre(self):
+        for i in range( 4 ):
+            self._turtle.forward( 100 )
+            self._turtle.right(90)
+
+    def rosace2 (self):
+        self._turtle.clear()
+        self._turtle.penup()
+        self._turtle.teleport(0, 0)
+        self._turtle.pendown()
+        # Drawing sequence
+        angle = 5 # en degrés
+        for i in range( 360 // angle ):
+            self.faire_carre(self)
+            self._turtle.left(angle)
