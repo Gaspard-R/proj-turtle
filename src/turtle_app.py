@@ -31,6 +31,8 @@ class TurtleApp:
         self._turtle.screen.onkey(self.on_right_key_event, "Right")
         self._turtle.screen.onkey(self.reset_turtle, "space")
         self._turtle.screen.onkey(self.active, "p")
+        self._turtle.screen.onscreenclick(self.rosace)
+
 
     def on_up_key_event(self):
         self._turtle.forward(10)
@@ -60,4 +62,16 @@ class TurtleApp:
             self._turtle.pendown()
             self._turtle.color("black")
             self.pinceau_actif=True
-        
+    
+    def rosace (self, x, y):
+        self._turtle.penup()
+        self._turtle.teleport(x, y)
+        self._turtle.pendown()
+        # Drawing sequence
+        self._turtle.begin_fill()
+        while True:
+            self._turtle.forward(150)
+            self._turtle.left(140)
+            if abs(self._turtle.pos() - Vec2D(x, y)) < 1:
+                break
+        self._turtle.end_fill()
